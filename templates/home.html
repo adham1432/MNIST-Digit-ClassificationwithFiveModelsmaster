@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Predictor</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="container">
+        <div class="Enter">
+            <h2>Model Predictor</h2>
+            <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                <label for="model">Choose a Model:</label>
+                <select id="model" name="model">
+                    <option value="dnn_model">Deep Neural Network Model</option>
+                    <option value="dt_model">Decision Tree Model</option>
+                    <option value="nb_model">Naive Bayes Model</option>
+                    <option value="knn_model">K Nearest Neighbors Model</option>
+                    <option value="RF_model">Random Forest Model</option>
+                </select>
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <input type="submit" value="Predict">
+            </form>
+        </div>
+        {% if prediction %}
+            <div class="prediction">
+                <img class="EntedImage" src="data:image/jpeg;base64,{{ img_base64 }}" alt="Entered image">
+                <p class="predictedResult">Class {{predicted_value}}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
